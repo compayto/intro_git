@@ -1,5 +1,4 @@
 gitの練習をします
 test
-
 git add
-git commit
+git commitSS
