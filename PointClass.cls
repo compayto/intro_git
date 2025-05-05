@@ -37,17 +37,6 @@ Property Let z(inputZ As Double)
     valZ = inputZ
 End Property
 
-Property Let setPointFromStr(str As String)
-    Dim buf As Variant: buf = Split(Replace(Replace(str, "(", ""), ")", ""), ",")
-    If UBound(buf) - LBound(buf) + 1 = 3 Then
-        valX = buf(0)
-        valY = buf(1)
-        valZ = buf(2)
-    Else
-        Call errorMsg(-1)
-    End If
-End Property
-
 Public Function GetVector(endPoint As PointClass) As VectorClass
     Set GetVector = New VectorClass
     GetVector.x = endPoint.x - x
@@ -55,6 +44,19 @@ Public Function GetVector(endPoint As PointClass) As VectorClass
     GetVector.z = endPoint.z - z
 
 End Function
+
+Property Let setPointFromStr(str As String)
+    Dim buf As Variant: buf = Split(Replace(Replace(str, "(", ""), ")", ""), ",")
+    If UBound(buf) - LBound(buf) + 1 = 3 Then
+        valX = buf(0)
+        valY = buf(1)
+        valZ = buf(2)
+    Else
+        Call errorComand(-1)
+    End If
+End Property
+
+
 
 Public Sub debug_()
     
@@ -64,7 +66,11 @@ Public Sub debug_()
 
 End Sub
 
-Private Function errorMsg(errorcode As Long) As String
+Private Sub errorComand(errorcode As Long)
+    Dim errorMsg As String
     Select Case errorcode
     Case -1: errorMsg = "3éüå≥Ç∂Ç·Ç»Ç¢Ç≈Ç∑"
-End Function
+    Case Else: errorMsg = "ïsñæÇ»ÉGÉâÅ[Ç≈Ç∑"
+    End Select
+    Call MsgBox(errorMsg, vbInformation)
+End Sub
